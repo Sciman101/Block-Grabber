@@ -1,22 +1,31 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Sprites/player16.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/PlatformerPlayer.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Player.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/TileStack.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 7.5 )
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"Player",
+]]
 script = ExtResource( 2 )
 
 [node name="GroundChecker" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, 10 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2( 0, 0.5 )
-shape = SubResource( 1 )
-
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
+
+[node name="TileStack" type="Node2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="Tween" type="Tween" parent="TileStack"]
+
+[node name="Sprites" type="Node2D" parent="TileStack"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 0.5 )
+shape = SubResource( 1 )
